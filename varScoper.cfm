@@ -5,15 +5,28 @@
 	
 	Author: Mike Schierberl 
 			mike@schierberl.com
+			
+	Modifications:
+			Christopher Wigginton
+			
 	
 
 	Change log:
 		7/14/2006 - initial revision
 		11/1/2007 - support for ColdFusion MX - 8
+		11/13/2015 - Added support for CF 9-11, added feature to check against cfarguments.  UI modifications for script and copy to clipboard
 
 	Fixes:
 		-changed processDirectory() not to be dependant on the resultset that cfdirectory returns for ColdFusion 7 - 8
  --->
+<cfparam name="url.tabs" default="2">
+<cfparam name="url.codeStyle" default="tag">
+
+<cfset objRequest = GetPageContext().GetRequest() />
+
+<!--- Get requested URL from request object. --->
+<cfset strUrl = objRequest.GetRequestUrl().ToString()/>
+<cfset strURL = listDeleteAt(strURL,listLen(strURL,"/"),"/") & "/">
 
 <cffunction name="processDirectory" hint="used to traverse a directory structure">
 	<cfargument name="startingDirectory" type="string" required="true">
@@ -84,7 +97,7 @@
 <cfif isdefined("url.filePath")>
 	<cfset scoperFileName=url.filePath>
 <cfelse>
-	<cfset scoperFileName="testCaseCFC.cfc">
+	<cfset scoperFileName="/Common">
 </cfif>
 
 
@@ -148,14 +161,36 @@ th.codeCell{
 	border-width: 2px 0px 0px 0px;
 	border-style: solid;
 }
+
+.gh-btns {
+    margin: 92px 0 0;
+    background: rgba(0, 0, 0, .1);
+    padding: 20px 0 10px;
+}
+
+/
+
+.clippy {
+    margin-top: -3px;
+    position: relative;
+    top: 3px;
+}
+
+.btn[disabled] .clippy {
+    opacity: .3;
+}
 </style>
+<cfoutput>
+<script type="text/javascript" src="#strURL#clipboard.min.js"></script>
+</cfoutput>
 <title>varscoper</title>
 </head>
 <body>
 
 <cfsetting showdebugoutput="false">
 <cfparam name="displayFormat" default="">
-<form action="varScoper.cfm" method="get" name="scoperForm" id="scoperForm" <!--- onsubmit="document.scoperForm.submitButton.disabled=true;" --->>
+<form action="varScoper.cfm" method="get" name="scoperForm" id="scoperForm" >
+	<i>Path or individual file</i><br>
 	absolute path:
 	<cfoutput>
 		<input type="text" name="filePath" id="filePath" size="75" value="#htmlEditFormat(scoperFileName)#" />
@@ -175,7 +210,12 @@ th.codeCell{
 	<input type="checkbox" name="recursiveDirectory" value="true" <cfif NOT isDefined("URL.recursiveDirectory") or findNoCase('true',URL.recursiveDirectory)>checked</cfif>> include sub-folders<br>
 	<input type="hidden" name="parseCFScript" value="disabled" /> 
 	<input type="checkbox" name="parseCfscript" value="true" <cfif NOT isDefined("URL.parseCfscript") OR findNoCase('true',URL.parseCfscript) >checked</cfif>> parse cfscript. note: this will NOT return correct line numbers
-
+    <br>
+    <input type="checkbox" name="useTextArea" value="true" <cfif  isDefined("URL.useTextArea")  >checked</cfif>> Corrected Code in Text Area<br>
+    <input type="checkbox" name="applyPrefix" value="true" <cfif  isDefined("URL.applyPrefix")  >checked</cfif>> Apply formatting prefix to corrected code
+     # of tabs <cfoutput><input type="text" name="tabs" size="2" value="#url.tabs#"></cfoutput><br>
+     Corrected Code Style: <input type="radio" name="codeStyle" <cfif url.codeStyle eq "tag">checked</cfif> value="tag">Tag &nbsp;&nbsp;  <input type="radio" name="codeStyle" <cfif url.codeStyle eq "script">checked</cfif> value="script"> cfscript
+     
 </form>
 
 <cfif isdefined("url.filePath") and trim(url.filePath) IS NOT "">

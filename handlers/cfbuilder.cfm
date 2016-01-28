@@ -168,11 +168,14 @@ th.codeCell{
 					<tr>
 						<th class="codeCell" colspan="2" align="right">Corrective Code:</th>
 						<td class="codeCell" bgcolor="##E2DDB5">
+						<textarea>
+						#htmlEditFormat(chr(60) & "!--- Variables Scoped To Function ---" & chr(62))#<br>
 						<cfloop from="1" to="#arrayLen(tempUnscopedArray)#" index="unscopedIdx">
 								<cfif structKeyExists(tempUnscopedArray[unscopedIdx],"LineNumber") AND tempUnscopedArray[unscopedIdx].LineNumber NEQ 1>
-									<cfoutput>#htmlEditFormat("<cfset var " & trim(tempUnscopedArray[unscopedIdx].VariableName) & "	= '' />")#<br></cfoutput> 
+									<cfoutput>#prefix##htmlEditFormat("<cfset var " & trim(tempUnscopedArray[unscopedIdx].VariableName) & "	= """" >")#<br></cfoutput> 
 								</cfif>
 						</cfloop>
+						</textarea>
 						</td>
 					</tr>
 					</tbody>

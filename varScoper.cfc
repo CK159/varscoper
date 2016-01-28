@@ -4,6 +4,14 @@
 	
 	Author: Mike Schierberl 
 			mike@schierberl.com
+			
+	Modifications: Christopher Wigginton
+				   c_wigginton@yahoo.com
+				   
+	History:
+			11/13/2015 cwigginton
+					   added CF10 and CF11 tags
+					   added support by checking function arguments <cfargument name ="foo"...   and not scoping vars that are arguments
 	
 
 	Features:
@@ -26,6 +34,7 @@
 			<cfset arguments.foo.foo2 />
 		
 		-Cfscript does not return line numbers
+		
 
  --->
 
@@ -61,42 +70,64 @@
 		attribute 3) tag attribute name that tells the tag it is to accept a variable
 		attribute 4) tag attribute value (read, create, etc) that tells the tag it is to accept a variables (works in conjunction with attribute 3)
 	--->
-	<cfset arrayAppend(variables.tagTypes,"cfloop:index") />
-	<cfset arrayAppend(variables.tagTypes,"cfloop:item") />
-	<cfset arrayAppend(variables.tagTypes,"cfquery:name") />
-	<cfset arrayAppend(variables.tagTypes,"cfinvoke:returnvariable") />
-	<cfset arrayAppend(variables.tagTypes,"cfdirectory:name") />
-	<cfset arrayAppend(variables.tagTypes,"cffile:variable") />
-	<cfset arrayAppend(variables.tagTypes,"cfparam:name") />
-	<cfset arrayAppend(variables.tagTypes,"cfsavecontent:variable") />
-	<cfset arrayAppend(variables.tagTypes,"cfform:name") />
-	<cfset arrayAppend(variables.tagTypes,"cfstoredproc:name")>
-	<cfset arrayAppend(variables.tagTypes,"cfprocparam:variable:type:out")>
-	<cfset arrayAppend(variables.tagTypes,"cfhttp:result")>
-	<cfset arrayAppend(variables.tagTypes,"cfquery:result")>
-	<cfset arrayAppend(variables.tagTypes,"cfimage:name")>
-	<cfset arrayAppend(variables.tagTypes,"cfmail:query")>
-	<cfset arrayAppend(variables.tagTypes,"cffeed:name")>
-	<cfset arrayAppend(variables.tagTypes,"cffeed:query:action:read")>
-	<cfset arrayAppend(variables.tagTypes,"cfftp:name")>
-	<cfset arrayAppend(variables.tagTypes,"cfftp:result")>
-	<cfset arrayAppend(variables.tagTypes,"cfwddx:output")>
-	<cfset arrayAppend(variables.tagTypes,"cfobject:name")>
-	<cfset arrayAppend(variables.tagTypes,"cfsearch:name")>
-	<cfset arrayAppend(variables.tagTypes,"cfprocresult:name")>
-	<cfset arrayAppend(variables.tagTypes,"cfpop:name")>
-	<cfset arrayAppend(variables.tagTypes,"cfregistry:name")>
-	<cfset arrayAppend(variables.tagTypes,"cfreport:name")>
-	<cfset arrayAppend(variables.tagTypes,"cfdbinfo:name")>
-	<cfset arrayAppend(variables.tagTypes,"cfdocument:name")>
-	<cfset arrayAppend(variables.tagTypes,"cfexecute:variable")>
 	<cfset arrayAppend(variables.tagTypes,"cfNtAuthenticate:result")>
 	<cfset arrayAppend(variables.tagTypes,"cfcollection:name")>
+	<cfset arrayAppend(variables.tagTypes,"cfdbinfo:name")>
+	<cfset arrayAppend(variables.tagTypes,"cfdirectory:name") />
+	<cfset arrayAppend(variables.tagTypes,"cfdocument:name")>
+	<cfset arrayAppend(variables.tagTypes,"cfexecute:variable")>
+	<cfset arrayAppend(variables.tagTypes,"cffeed:name")>
+	<cfset arrayAppend(variables.tagTypes,"cffeed:query:action:read")>
+	<cfset arrayAppend(variables.tagTypes,"cffile:variable") />
+	<cfset arrayAppend(variables.tagTypes,"cfform:name") />
+	<cfset arrayAppend(variables.tagTypes,"cfftp:name")>
+	<cfset arrayAppend(variables.tagTypes,"cfftp:result")>
+	<cfset arrayAppend(variables.tagTypes,"cfhttp:result")>
+	<cfset arrayAppend(variables.tagTypes,"cfimage:name")>
+	<cfset arrayAppend(variables.tagTypes,"cfinvoke:returnvariable") />
+	<cfset arrayAppend(variables.tagTypes,"cfldap:name")>
+	<cfset arrayAppend(variables.tagTypes,"cfloop:index") />
+	<cfset arrayAppend(variables.tagTypes,"cfloop:item") />
+	<cfset arrayAppend(variables.tagTypes,"cfmail:query")>
+	<cfset arrayAppend(variables.tagTypes,"cfobject:name")>
+	<cfset arrayAppend(variables.tagTypes,"cfparam:name") />
 	<cfset arrayAppend(variables.tagTypes,"cfpdf:name")>
+	<cfset arrayAppend(variables.tagTypes,"cfpop:name")>
+	<cfset arrayAppend(variables.tagTypes,"cfprocparam:variable:type:out")>
+	<cfset arrayAppend(variables.tagTypes,"cfprocresult:name")>
+	<cfset arrayAppend(variables.tagTypes,"cfquery:name") />
+	<cfset arrayAppend(variables.tagTypes,"cfquery:result")>
+	<cfset arrayAppend(variables.tagTypes,"cfregistry:name")>
+	<cfset arrayAppend(variables.tagTypes,"cfreport:name")>
+	<cfset arrayAppend(variables.tagTypes,"cfsavecontent:variable") />
+	<cfset arrayAppend(variables.tagTypes,"cfsearch:name")>
+	<cfset arrayAppend(variables.tagTypes,"cfstoredproc:name")>
+	<cfset arrayAppend(variables.tagTypes,"cfwddx:output")>
 	<cfset arrayAppend(variables.tagTypes,"cfxml:variable")>
 	<cfset arrayAppend(variables.tagTypes,"cfzip:name")>
-	<cfset arrayAppend(variables.tagTypes,"cfldap:name")>
-
+	
+	
+	<cfset arrayAppend(variables.tagTypes,"cfNTauthenticate:result")>
+	<cfset arrayAppend(variables.tagTypes,"cfinvoke:returnvariable")>
+	
+	<!--- cwigginton adding additional tag support CF 9--->
+	<cfset arrayAppend(variables.tagTypes,"cfimap:name")>
+	<cfset arrayAppend(variables.tagTypes,"cfsharepoint:name")>
+	<cfset arrayAppend(variables.tagTypes,"cfspreadsheet:name:action:read")>
+	<cfset arrayAppend(variables.tagTypes,"cfspreadsheet:query:action:read")>
+		
+	<!--- cwigginton adding additional tag support CF 10--->
+	<cfset arrayAppend(variables.tagTypes,"cfexchangeconversation:name")>
+	<cfset arrayAppend(variables.tagTypes,"cfexchangefolder:name")>
+	<cfset arrayAppend(variables.tagTypes,"cfexchangefolder:result")>
+	
+	
+	<!--- cwigginton adding additional tag support CF 11--->
+	<cfset arrayAppend(variables.tagTypes,"cfoauth:result")>
+	<cfset arrayAppend(variables.tagTypes,"cfimap:name")>
+	<cfset arrayAppend(variables.tagTypes,"cfcache:name")>
+	<cfset arrayAppend(variables.tagTypes,"cfhtmltopdf:name")>
+	
 	
 	<cffunction name="init" access="public" output="false" 
 		hint="I initialize an instance of the var scoper component which is used to find unscoped vars" >
@@ -143,7 +174,9 @@
 		<cfset var RegExCffunction				= "<\s?cffunction\b[^>]*>(.*?)</\s?cffunction\s?>" />
 		<cfset var tempCurrentFunctionStruct	= "" />
 		<cfset var tagTypeIdx					= "" />
+		<cfset var findArgsResult               = "" />
 		<cfset var findVarsResult				= "" />
+		<cfset var tempArgsStruct               = "" />
 
 		
 		<!--- Use a RE to find text within the first cffunction, do this once here and once at the bottom of the loop so we can use a condition loop --->
@@ -188,19 +221,38 @@
 					<cfset variables.currentLineCountFuncPos = functionREfind.POS[1] />
 	
 					<!--- set functionInnerText to return a string of everything contained within the current function --->
-					<cfset functionInnerText = mid(fileParseText,functionREfind.POS[1],functionREfind.LEN[1])>
+					<cfset functionInnerText = mid(fileParseText,functionREfind.POS[1],functionREfind.LEN[1])>					
 					
 					<!--- Start parsing at position 1 within the current function string --->
 					<cfset currentPositionVarFind = 1>
 					
 					<cfset variables.varscoperStruct["#functionName#"] = structNew() />
+					
+					<!--- cwigginton create struct to identify all arguments defined in the function --->
+					<cfset variables.varscoperStruct["#functionName#"].argsStruct = structNew() />
+					<cfset tempArgsStruct = variables.varscoperStruct["#functionName#"].argsStruct />
+					
+					
 					<!--- Create a struct to identify all variables that have been correctly var-ed within this function --->
 					<cfset variables.varscoperStruct["#functionName#"].varedStruct = structNew() />
 					<cfset tempVaredStruct = variables.varscoperStruct["#functionName#"].varedStruct />
+					
 	
 					<!--- Create another struct to identify variables that don't exist in the current functions var-ed variables --->
 					<cfset variables.varscoperStruct["#functionName#"].unVaredStruct = structNew() />
 					<cfset tempUnVaredStruct = variables.varscoperStruct["#functionName#"].unVaredStruct />
+					
+					<!--- load <cfarguments into argsStruct first --->
+					<cfset findVarsByTag( currentFunctionName=functionName,
+					                      tagName="cfargument",
+										  variableName="name",
+										  tagAcceptAttribute="",
+										  tagAcceptAttributeValue = "",
+										  stringToParse=functionInnerText,
+										  positionToStart=1,			
+										  structScope="argsStruct")>
+					
+					
 					
 					<!--- findVars processes a string and returns a struct containing all variables set by vars as well as the line number of the end block for vars --->
 					<cfset findVarsResult = findVars(functionInnerText) />
@@ -222,7 +274,7 @@
 						
 					</cfloop>
 					
-	
+
 					<!--- Done finding vars, lets append this to the array --->
 					<!--- Only add functions where we have unscoped vars --->
 					<cfif NOT arrayIsEmpty(variables.tempUnscopedArray) >
@@ -360,6 +412,9 @@
 	</cffunction>
 	
 	
+	
+	
+	
 	<cffunction name="findCFsetVariables" output="false" returntype="void"
 		hint="I scope the function and process all variables that were created with a cfset">
 			<cfargument name="stringToParse" type="string" hint="I am the block of text that will be parsed to find unscoped vars">
@@ -375,6 +430,7 @@
 
 			<cfset var currentPositionVariableFind = arguments.positionToStart />
 			<cfset var functionInnerText = arguments.stringToParse />
+			<cfset var tempArgsStruct = variables.varscoperStruct["#arguments.currentFunctionName#"].argsStruct />
 			<cfset var tempVaredStruct = variables.varscoperStruct["#arguments.currentFunctionName#"].varedStruct />
 			<cfset var tempUnVaredStruct = variables.varscoperStruct["#arguments.currentFunctionName#"].unVaredStruct />
 						
@@ -399,14 +455,23 @@
 				
 				<!--- if the variable a good variable name? --->
 				<cfif isGoodVariableName(VariableNameCfsetIsolate)>
-					<cfif structKeyExists(tempVaredStruct,"#VariableNameCfsetIsolate#")>
-						<!--- Update the var-ed struct to note that we are using this var --->
-						<cfset tempVaredStruct["#VariableNameCfsetIsolate#"] = "used">
-					<cfelse>
-						<!--- Log the unvared struct, just the root, before dot or array notation --->
-						<cfset addToUnVarArray(variableName:"#ListFirst(ListFirst(VariableNameCfsetIsolate,'['),'.')#",VariableContext:VariableNAmeCfSet,textPositionInFunction:variableREFind.POS[1]) />
-						<cfset tempUnvaredStruct["#ListFirst(ListFirst(VariableNameCfsetIsolate,'['),'.')#"] = VariableNameCfset />
+					
+				
+					<cfif ! structKeyExists(tempArgsStruct,"#VariableNameCfsetIsolate#")>
+						
+					
+					
+						<cfif structKeyExists(tempVaredStruct,"#VariableNameCfsetIsolate#")>
+							<!--- Update the var-ed struct to note that we are using this var --->
+							<cfset tempVaredStruct["#VariableNameCfsetIsolate#"] = "used">
+						<cfelse>
+							<!--- Log the unvared struct, just the root, before dot or array notation --->
+							<cfset addToUnVarArray(variableName:"#ListFirst(ListFirst(VariableNameCfsetIsolate,'['),'.')#",VariableContext:VariableNAmeCfSet,textPositionInFunction:variableREFind.POS[1]) />
+							<cfset tempUnvaredStruct["#ListFirst(ListFirst(VariableNameCfsetIsolate,'['),'.')#"] = VariableNameCfset />
+						</cfif>
+					
 					</cfif>
+					
 				</cfif>
 				
 				<!--- Update the current parsing position to start from the end of the cfset statement --->
@@ -493,6 +558,9 @@
 		<cfargument name="stringToParse" type="string" hint="I am the block of text that will be parsed to find unscoped vars">
 		<cfargument name="positionToStart" type="numeric" hint="I am the starting position, this is generally right after the var-ed variables">
 		<cfargument name="currentFunctionName" type="string" hint="I am the name of the current function that is being parsed" >
+		<cfargument name="structScope" type="string" default="varedStruct">
+		
+		
 		
 		<cfset var currentPositionLoopFind = 0 />
 		<cfset var loopREFind = "" />
@@ -558,25 +626,31 @@
 							<!--- string leading and trailing quotes and pounds --->
 							<cfset variableNameIsolationString = stripLeadingAndTrailingQuotesAndPoundsFromVariableName(variableNameIsolationString) >
 						
-							<!--- Check to see if this is properly scoped already, make sure to check dot and array notation --->
-							<cfif structKeyExists(variables.varscoperStruct["#arguments.currentFunctionName#"].varedStruct,"#variableNameIsolationString#")>
-								<!--- Update the var-ed struct to note that we are using this var --->
-								<cfset variables.varscoperStruct["#arguments.currentFunctionName#"].varedStruct["#variableNameIsolationString#"] = "used">
-							
-							<!--- Removed this code because it is handled abovewith the double listFirst --->
-							<!---<cfelseif structKeyExists(variables.varscoperStruct["#arguments.currentFunctionName#"].varedStruct,"#ListFirst(variableNameIsolationString,'[')#")>
-								<!--- May exist in array notation --->
-								<!--- Not sure if this is even a valid case??  --->
-								<cfset variables.varscoperStruct["#arguments.currentFunctionName#"].varedStruct["#ListFirst(variableNameIsolationString,'[')#"] = "used">
-							<cfelseif structKeyExists(variables.varscoperStruct["#arguments.currentFunctionName#"].varedStruct,"#ListFirst(variableNameIsolationString,'.')#")>
-								<!--- May exist in dot notation --->
-								<cfset variables.varscoperStruct["#arguments.currentFunctionName#"].varedStruct["#ListFirst(variableNameIsolationString,'.')#"] = "used">  --->							
-							
+							<!--- cwigginton arguments are added first, so if this tag isn't collecting arguments
+							then check against the argument struct and do nothing if it exists there--->
+							<cfif arguments.structScope eq "varedStruct" >
+								
+								<!--- this will skip the var if it's an argument, since arguments do not have to be scoped as arguments.varname within functions --->
+								<cfif ! structKeyExists(variables.varscoperStruct["#arguments.currentFunctionName#"]["argsStruct"],"#variableNameIsolationString#") >															
+									<!---it's not an argument --->
+									<cfif structKeyExists(variables.varscoperStruct["#arguments.currentFunctionName#"]["#arguments.structScope#"],"#variableNameIsolationString#")>
+										<!--- Check to see if this is properly scoped already, make sure to check dot and array notation --->
+										<!--- Update the var-ed struct to note that we are using this var --->
+										<cfset variables.varscoperStruct["#arguments.currentFunctionName#"]["#arguments.structScope#"]["#variableNameIsolationString#"] = "used">	
+									<cfelse>
+										<!--- Var doesn't EXIST!!! this may be bad, lets track it --->
+										<cfset addToUnVarArray(variableName:variableNameIsolationString,VariableContext:tagIsolationString,textPositionInFunction:loopREFind.POS[1]) />
+									</cfif>
+									<cfset variables.varscoperStruct["#arguments.currentFunctionName#"][arguments.structScope]["#variableNameIsolationString#"] = tagIsolationString>
+								</cfif>
 							<cfelse>
-								<!--- Var doesn't EXIST!!! this may be bad, lets track it --->
-					
-								<cfset addToUnVarArray(variableName:variableNameIsolationString,VariableContext:tagIsolationString,textPositionInFunction:loopREFind.POS[1]) />
-								<cfset variables.varscoperStruct["#arguments.currentFunctionName#"].unvaredStruct["#variableNameIsolationString#"] = tagIsolationString>
+								<cfif ! structKeyExists(variables.varscoperStruct["#arguments.currentFunctionName#"]["argsStruct"],"#variableNameIsolationString#") >		
+									<cfset variables.varscoperStruct["#arguments.currentFunctionName#"][arguments.structScope]["#variableNameIsolationString#"] = tagIsolationString>
+								<cfelse>
+									<cfthrow message ="duplicate argument in function #arguments.currentFunctionName#">
+								</cfif>
+								
+								
 							</cfif>
 						</cfif>
 					<cfcatch type="unknownVariableType">
