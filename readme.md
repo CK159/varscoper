@@ -1,5 +1,5 @@
 # VarScoper (fork) 
-This is a fork of Mike Schierberl's original VarScoper which hasn't been updated since 2010.  His main project site doesn't appear to be available, so I've captured that through archive.org and put most of it [Here](/https://github.com/wiggick/varscoper/blob/master/about.md/).  
+This is a fork of Mike Schierberl's original VarScoper which hasn't been updated since 2010.  His main project site doesn't appear to be available, so I've captured that through archive.org and put most of it [Here](https://github.com/wiggick/varscoper/blob/master/about.md).  
 
 New Features:
   - Updated for latest tags (CF11)
