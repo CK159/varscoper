@@ -4,7 +4,7 @@ varScoper is a cfc and corresponding views that are designed to identify variabl
 If you have never missed a single (cfset var) statement when writing code, you can stop reading now.  If you don't know what (cfset var) is for, then you absolutely need to take a look at this code..
 
 If you are not quite sure why scoping variables within cffunctions is so important, you should take a look at the following resources. 
-[Raymond Camden's guide to variable scopes (pdf)](/http://ray.camdenfamily.com/downloads/cfcscopes.pdf/)
+[Raymond Camden's guide to variable scopes (pdf)](/http://https://web.archive.org/web/20070228114916/http://ray.camdenfamily.com/downloads/cfcscopes.pdff/)
 
 Properly scoping variables is extremely critical especially as you start to cache cfc instances in shared scopes(session, application, server).  mach-ii and modelglue users should definitely be aware of this.
 
