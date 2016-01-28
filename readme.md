@@ -11,7 +11,7 @@ New Features:
 1.4
 
 ### Installation Instructions:
-Extract all files to a publicly accesible directory on your CFMX 6 or 7 server.  
+Extract all files to a publicly accesible directory on your ColdFusion server.  
 
 Navigate to index.cfm or varscoper.cfm and enter the absolute or relative path to the template or directory that you would like to check. 
 
